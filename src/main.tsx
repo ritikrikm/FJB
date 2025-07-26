@@ -6,12 +6,14 @@ import App from './App.tsx';
 
 import './index.css';
 import ComingSoon from './components/pages/ComingSoon.tsx';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 
 
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
+    <ErrorBoundary>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/jobs" element={<ComingSoon />} />
@@ -19,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/resources" element={<ComingSoon />} />
 
       </Routes>
+      </ErrorBoundary>
     </BrowserRouter>
   </React.StrictMode>
 );

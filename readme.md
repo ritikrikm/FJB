@@ -67,3 +67,12 @@ Overall Project Changes Summary
 5. Enabled lazy loading for large components to improve initial load speed.
 Deployed the app on Vercel with environment variables and authentication working correctly in production.
 6. Created a README with setup instructions, live demo link, and clean documentation.
+
+
+For Production:
+Even though this project is small in scope, it’s designed with scalability and environment separation in mind, reflecting real-world enterprise practices.
+
+Environment-Specific Configuration
+The app supports environment-specific settings using a centralized config/ folder
+Added an ErrorBoundary wrapper in main.tsx
+Designed to integrate structured logging in future using LOG_LEVEL values from config/
