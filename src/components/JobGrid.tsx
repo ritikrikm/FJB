@@ -23,18 +23,25 @@ const JobGrid: React.FC<JobGridProps> = ({ jobs, onJobClick }) => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
         <p className="text-xs text-gray-600 dark:text-gray-400">
           {jobs.length} job opportunities waiting
         </p>
-        <div className="flex items-center space-x-3 text-xs text-gray-600 dark:text-gray-400">
-          <span>Find Your Dream Job in Fitness, Sports, and Wellness Development...</span>
-          <button className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 underline">Read more</button>
+
+        <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
+          <span className="whitespace-nowrap">Find Your Dream Job in Fitness, Sports, and Wellness Development...</span>
+          <button className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 underline">
+            Read more
+          </button>
+
+          {/* Dots */}
           <div className="flex space-x-1">
             <div className="w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full"></div>
             <div className="w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full"></div>
             <div className="w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full"></div>
           </div>
+
+          {/* Grid icon mimic */}
           <div className="flex space-x-1">
             <div className="w-4 h-4 border border-gray-300 dark:border-gray-600 flex items-center justify-center">
               <div className="w-1 h-1 bg-gray-400 dark:bg-gray-500"></div>
@@ -45,7 +52,7 @@ const JobGrid: React.FC<JobGridProps> = ({ jobs, onJobClick }) => {
           </div>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} onClick={() => onJobClick(job)} />

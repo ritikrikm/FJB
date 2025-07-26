@@ -44,15 +44,16 @@ const ApplicationModal: React.FC<ApplicationModalProps> = ({ job, isOpen, onClos
   
 
   const handleFileUpload = useCallback((file: File) => {
+    if (file.size > 10 * 1024 * 1024) {
+      alert("File size should not exceed 10MB");
+      return;
+    }
     if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
       setFormData(prev => ({
         ...prev,
         resume: file
       }));
-    } if (file.size > 10 * 1024 * 1024) {
-      alert("File size should not exceed 10MB");
-      return;
-    }
+    } 
     else {
       alert('Please upload a PDF file only');
     }

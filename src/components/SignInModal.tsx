@@ -80,7 +80,7 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose }) => {
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute top-8 right-3 text-xs text-blue-500 dark:text-blue-400 cursor-pointer"
+              className="absolute top-8 right-3 text-xs text-gray-500 dark:text-gray-400 cursor-pointer"
             >
               {showPassword ? 'Hide' : 'Show'}
             </span>
