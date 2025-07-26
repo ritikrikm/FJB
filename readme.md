@@ -66,4 +66,4 @@ Overall Project Changes Summary
 4. Added custom hooks (like useJobFilters) and helper utilities to separate logic from presentation, making the codebase more maintainable.
 5. Enabled lazy loading for large components to improve initial load speed.
 Deployed the app on Vercel with environment variables and authentication working correctly in production.
-6. Created a README with setup instructions, live demo link, and clean documentation for future contributors.
+6. Created a README with setup instructions, live demo link, and clean documentation.
