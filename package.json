@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:qa": "vite --mode qa",
+    "dev:uat": "vite --mode uat",
+    "dev:prod": "vite --mode production",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
