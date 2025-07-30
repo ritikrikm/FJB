@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus ,Loader2 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
@@ -19,8 +19,10 @@ const navItems = [
 
 const Header: React.FC<HeaderProps> = ({ onPostJob, onSignIn }) => {
   const [showLogout, setShowLogout] = useState(false);
+  const [loading,setLoading] = useState(false)
   const {user} = useContext(AuthContext);
     const handleLogout = async () => {
+      setLoading(true)
     await supabase.auth.signOut();
     window.location.reload(); // or trigger a re-check in App
   };
@@ -62,8 +64,14 @@ const Header: React.FC<HeaderProps> = ({ onPostJob, onSignIn }) => {
                   onClick={handleLogout}
                   className="text-xs text-gray-900 dark:text-white bg-transparent border-none cursor-pointer hover:underline"
                   title="Click to logout"
-                >
-                  Welcome, {user?.name}
+                >{loading? ( 
+                  <Loader2
+                  className='animate-spin w-4 h-4'
+                  />
+                ):(
+                    <span>Welcome, {user.name}</span>
+                )}
+                 
                 </button>
               ) : (
                 <button 
