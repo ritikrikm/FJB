@@ -8,15 +8,16 @@ import './index.css';
 import ComingSoon from './components/pages/ComingSoon';
 import ErrorBoundary from './components/ErrorBoundary';
 import App from './App';
-import { AuthContext } from './contexts/AuthContext';
+
+import { AuthProvider } from './contexts/AuthProvider';
 
 
 createRoot(document.getElementById('root')!).render(
 
   <React.StrictMode>
     <BrowserRouter>
+    <AuthProvider>
       <ErrorBoundary>
-      
         <Routes>
           <Route path="/" element={<App />} >
             <Route index element={<App/>} />
@@ -24,9 +25,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path="companies" element={<ComingSoon />} />
             <Route path="resources" element={<ComingSoon />} />
           </Route>
-        </Routes>
-       
+        </Routes> 
       </ErrorBoundary>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

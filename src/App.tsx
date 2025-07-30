@@ -9,9 +9,9 @@ import DashboardWidget from './components/DashboardWidget';
 import { FilterState } from './types/filterState';
 import { useJobFilters } from './hooks/useJobFilters';
 import { mockJobs } from './data/mockJobs';
-import { supabase } from './supabaseClient';
+
 import { useLocation, Outlet } from 'react-router-dom';
-import { AuthContext } from './contexts/AuthContext';
+
 import { useAuth } from './hooks/useAuth';
 
 const JobDetailModal = React.lazy(() => import('./components/JobDetailModal'));
@@ -50,19 +50,17 @@ function App() {
 
   return (
     <ThemeProvider>
-      <AuthContext.Provider value={{ user, setUser }}>
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
         <Header onSignIn={() => setIsSignInOpen(true)} onPostJob={handlePostJob}  />
-        <main className="container mx-auto px-6 py-8 max-w-6xl">
-          {isHome? (<>
-            { user && <DashboardWidget />}
-            
-          <SearchFilters filters={filters} onFilterChange={handleFilterChange} />
-          <JobGrid jobs={filteredJobs} onJobClick={handleJobClick} />
-          </>) : (<Outlet/>)}
+          <main className="container mx-auto px-6 py-8 max-w-6xl">
+            {isHome? (<>
+              { user && <DashboardWidget />}       
+                <SearchFilters filters={filters} onFilterChange={handleFilterChange} />
+                <JobGrid jobs={filteredJobs} onJobClick={handleJobClick} />
+                </>) : (<Outlet/>)}
 
 
-        </main>
+          </main>
 
         {isPostModalOpen && (
           <Suspense fallback={<div className="text-center text-gray-500 dark:text-gray-300 py-10">Loading Post Job...</div>}>
@@ -78,7 +76,7 @@ function App() {
 
         <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
       </div>
-      </AuthContext.Provider>
+
     </ThemeProvider>
   );
 }
