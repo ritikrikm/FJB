@@ -20,7 +20,8 @@ export function useJobFilters(initialJobs: Job[]) {
     search: '',
     location: '',
     jobType: '',
-    experience: ''
+    experience: '',
+    companyName:''
   });
 
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);

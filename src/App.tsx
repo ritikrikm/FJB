@@ -10,6 +10,9 @@ import { FilterState } from './types/filterState';
 import { useJobFilters } from './hooks/useJobFilters';
 import { mockJobs } from './data/mockJobs';
 import { supabase } from './supabaseClient';
+import { useLocation, Outlet } from 'react-router-dom';
+import { AuthContext } from './contexts/AuthContext';
+import { useAuth } from './hooks/useAuth';
 
 const JobDetailModal = React.lazy(() => import('./components/JobDetailModal'));
 const PostJobModal = React.lazy(() => import('./components/PostJobModal'));
@@ -19,29 +22,14 @@ function App() {
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [userName, setUserName] = useState<string | null>(null);
+
+  const location = useLocation();
+  const isHome = location.pathname==='/';
+  const {user , setUser} = useAuth();
 
   const { filters, setFilters, filteredJobs } = useJobFilters(jobs);
 
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setIsUserLoggedIn(!!session);
-    };
-
-    checkSession();
-
-    // Also listen to auth changes
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserName(session?.user?.email ?? null);
-      setIsUserLoggedIn(!!session); 
-    });
-
-    return () => {
-      listener?.subscription.unsubscribe();
-    };
-  }, []);
+  
 
   const handleFilterChange = useCallback((newFilters: FilterState) => {
     setFilters(newFilters);
@@ -61,12 +49,17 @@ function App() {
 
   return (
     <ThemeProvider>
+      <AuthContext.Provider value={{ user, setUser }}>
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
-        <Header onSignIn={() => setIsSignInOpen(true)} onPostJob={handlePostJob} userName={userName} />
+        <Header onSignIn={() => setIsSignInOpen(true)} onPostJob={handlePostJob}  />
         <main className="container mx-auto px-6 py-8 max-w-6xl">
-          {isUserLoggedIn && <DashboardWidget />}
+          {isHome? (<>
+            { user && <DashboardWidget />}
           <SearchFilters filters={filters} onFilterChange={handleFilterChange} />
           <JobGrid jobs={filteredJobs} onJobClick={handleJobClick} />
+          </>) : (<Outlet/>)}
+
+
         </main>
 
         {isPostModalOpen && (
@@ -83,6 +76,7 @@ function App() {
 
         <SignInModal isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
       </div>
+      </AuthContext.Provider>
     </ThemeProvider>
   );
 }

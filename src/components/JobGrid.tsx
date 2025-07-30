@@ -29,7 +29,8 @@ const JobGrid: React.FC<JobGridProps> = ({ jobs, onJobClick }) => {
         </p>
 
         <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
-          <span className="whitespace-nowrap">Find Your Dream Job in Fitness, Sports, and Wellness Development...</span>
+          <span className="whitespace-nowrap">
+            Find Your Dream Job in Fitness, Sports, and Wellness Development...</span>
           <button className="text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 underline">
             Read more
           </button>

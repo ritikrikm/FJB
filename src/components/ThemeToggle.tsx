@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const ThemeToggle: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
 
+
+  
+  // useEffect(()=>{
+  //   const handleKey = (e:KeyboardEvent)=> {
+  //     if (e.key === 't') toggleTheme();
+  //   }
+  //   window.addEventListener('keydown',handleKey)
+  //   return () => window.removeEventListener('keydown', handleKey);
+  // },[toggleTheme])
   return (
     <button
       onClick={toggleTheme}

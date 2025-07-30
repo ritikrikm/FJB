@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Plus } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { AuthContext } from '../contexts/AuthContext';
 
 interface HeaderProps {
   onPostJob: () => void;
   onSignIn: () => void; 
-  userName?: string | null; // acceingting user info
+ // userName?: string | null; // acceingting user info
 }
 
 const navItems = [
@@ -16,9 +17,9 @@ const navItems = [
   { label: 'Resources', path: '/resources' }
 ];
 
-const Header: React.FC<HeaderProps> = ({ onPostJob, onSignIn,userName }) => {
+const Header: React.FC<HeaderProps> = ({ onPostJob, onSignIn }) => {
   const [showLogout, setShowLogout] = useState(false);
-
+  const {user} = useContext(AuthContext);
     const handleLogout = async () => {
     await supabase.auth.signOut();
     window.location.reload(); // or trigger a re-check in App
@@ -56,13 +57,13 @@ const Header: React.FC<HeaderProps> = ({ onPostJob, onSignIn,userName }) => {
               <span>Post Job</span>
             </button>
 
-            {userName ? (
+            {user?.name ? (
                 <button
                   onClick={handleLogout}
                   className="text-xs text-gray-900 dark:text-white bg-transparent border-none cursor-pointer hover:underline"
                   title="Click to logout"
                 >
-                  Welcome, {userName}
+                  Welcome, {user?.name}
                 </button>
               ) : (
                 <button 

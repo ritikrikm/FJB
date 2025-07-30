@@ -3,4 +3,5 @@ export interface FilterState {
     location: string;
     jobType: string;
     experience: string;
+    companyName:string;
   }

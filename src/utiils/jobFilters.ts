@@ -16,7 +16,7 @@ export function filterJobs(jobs: Job[], filters: FilterState): Job[] {
   
       const matchesExperience =
         filters.experience === '' || job.experience === filters.experience;
-  
-      return matchesSearch && matchesLocation && matchesJobType && matchesExperience;
+      const companyName = !filters.companyName ||job.company.toLowerCase().includes(filters.companyName.toLowerCase());
+      return matchesSearch && matchesLocation && matchesJobType && matchesExperience && companyName;
     });
   }

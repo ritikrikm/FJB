@@ -31,6 +31,12 @@ const filterConfig: FilterConfigItem[] = [
     icon: Search,
   },
   {
+    key: 'companyName',
+    type: 'text',
+    placeholder: 'Company Name',
+    icon: Search,
+  },
+  {
     key: 'location',
     type: 'text',
     placeholder: 'Location',

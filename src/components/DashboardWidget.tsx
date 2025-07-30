@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 
+
+
 const DashboardWidget: React.FC = () => {
+
   const [userInfo, setUserInfo] = useState<{ email: string; id: string } | null>(null);
 
   useEffect(() => {
