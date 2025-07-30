@@ -15,6 +15,7 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
+
     e.preventDefault();
     setError('');
 
@@ -38,12 +39,14 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose }) => {
       }
   
       alert('Signed in successfully');
+    
       onClose();
     }
   };
 
   const handleGoogleSignIn = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
+    
     if (error) setError(error.message);
   };
 
