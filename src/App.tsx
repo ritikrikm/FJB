@@ -41,6 +41,7 @@ function App() {
 
   const handleJobClick = useCallback((job: Job) => {
     setSelectedJob(job);
+  
   }, []);
 
   const handleCloseJobDetail = useCallback(() => {
@@ -55,6 +56,7 @@ function App() {
         <main className="container mx-auto px-6 py-8 max-w-6xl">
           {isHome? (<>
             { user && <DashboardWidget />}
+            
           <SearchFilters filters={filters} onFilterChange={handleFilterChange} />
           <JobGrid jobs={filteredJobs} onJobClick={handleJobClick} />
           </>) : (<Outlet/>)}

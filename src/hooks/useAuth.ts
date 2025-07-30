@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { User, useUser } from './useUser';
+import {  useUser } from './useUser';
 import { useLocalStorage } from './useLocalStorage';
 import { supabase } from '../supabaseClient';
+import { User } from '../types/User';
 
 export const useAuth = () => {
   const { user, addUser, removeUser, setUser } = useUser();
